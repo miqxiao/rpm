@@ -101,7 +101,7 @@
 
 /* Заголовок */
 .categories-title {
-  margin: 0;
+  margin-bottom: -20px;
   font-size: 28px;
   font-weight: 500;
   color: #ffffff;
@@ -821,4 +821,177 @@ main {
 @media (max-width: 420px) {
   .footer-grid { grid-template-columns: 1fr; }
   .footer-copy { justify-content: center; padding-top: 14px; font-size: 12px; }
+}
+
+
+/* СТРАНИЦА ФИЛЬМЫ И СЕРИАЛЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫ */
+/* ------------------ Movies & Series: минимальные отступы, ровные стрелки ------------------ */
+
+.ms-page {
+  width: 100%;
+  background: rgba(20,20,20,1);
+  position: relative;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* Блок героя: минимальные отступы */
+.ms-hero {
+  position: relative;
+  width: calc(100% - 5px);
+  margin: 10px auto;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+  aspect-ratio: 1594 / 835;
+  min-height: 680px; /* уменьшил минимальную высоту */
+  max-width: calc(100% - 5px); /* ограничиваем максимальную ширину */ }
+
+/* фон — реальное <img>, object-fit: cover для аккуратного заполнения */
+.ms-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  display: block;
+  transform: translateZ(0);
+  filter: saturate(.98) contrast(.96);
+}
+
+/* затемнение для читаемости текста */
+.ms-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+          180deg,
+          rgba(0,0,0,0.12) 0%,
+          rgba(0,0,0,0.32) 28%,
+          rgba(0,0,0,0.68) 62%,
+          rgba(0,0,0,0.92) 100%
+  );
+}
+
+/* Навигационные стрелки - смещены вниз */
+.ms-hero-arrow {
+  position: absolute;
+  top: 95%; /* Сместили вниз с 50% до 60% */
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: rgba(10,10,10,0.85);
+  color: #fff;
+  font-size: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 6;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: transform .12s ease, background .12s ease;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.85);
+  line-height: 0;
+  will-change: transform;
+  padding: 0; /* Убираем внутренние отступы */
+}
+.ms-hero-arrow.left  { left: 12px; }
+.ms-hero-arrow.right { right: 12px; }
+.ms-hero-arrow:focus { outline: none; box-shadow: 0 0 0 4px rgba(232,18,18,0.08); }
+.ms-hero-arrow:hover { transform: translateY(-50%) scale(1.05); background: rgba(20,20,20,0.95); }
+
+/* Стиль для иконок стрелок */
+.ms-hero-arrow img {
+  width: 20px; /* Размер иконки */
+  height: 20px;
+  object-fit: contain;
+}
+
+/* центральный контент — ближе к низу, но можно подправить bottom */
+.ms-hero-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  width: 100%;
+  max-width: 920px;
+  padding: 0 6px;
+  text-align: center;
+  bottom: 90px;
+}
+
+
+/* заголовок/описание — компактнее */
+.ms-hero-title {
+  font-size: 40px;
+  font-weight: 400;
+  margin-bottom: 8px; /* уменьшил с 48px до 8px */
+  color: #fff;
+  line-height: 1.08;
+  text-shadow: 0 4px 16px rgba(0,0,0,0.8);
+}
+.ms-hero-desc {
+  margin: 0 auto 24px;
+  max-width: 720px;
+  color: rgba(153, 153, 153, 1);
+  font-size: 14px;
+  font-weight: 100;
+}
+
+/* кнопки — плотнее, одинаковый визуальный ритм */
+.ms-hero-actions { display:inline-flex; gap:8px; align-items:center; justify-content:center; margin-top:6px; }
+.ms-btn { border: none; cursor: pointer; display:inline-flex; align-items:center; gap:6px; padding:10px 14px; border-radius:6px; font-weight:300; font-size:14px; background:transparent; color:#fff;  }
+.ms-btn-play { background: linear-gradient(180deg,#e81212,#b20808); box-shadow: 0 8px 24px rgba(232,18,18,0.2); padding:10px 14px; }
+.ms-btn-watch { background: linear-gradient(180deg,#e81212,#b20808); box-shadow: 0 8px 24px rgba(232,18,18,0.2); padding:8px 14px; }
+.ms-btn-icon { width:16px; height:16px; object-fit:contain; display:block; }
+.ms-btn-circle { width:38px; height:38px; padding:0; border-radius:8px; background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); display:inline-flex; align-items:center; justify-content:center; }
+.ms-btn-small-icon { width:15px; height:15px; object-fit:contain; display:block; }
+
+/* индикаторы — компактные и ниже контента */
+.ms-hero-indicators {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display:flex;
+  gap:6px;
+  z-index:6;
+}
+.ms-ind-dot { width:28px; height:3px; border-radius:3px; background: rgba(255,255,255,0.08); border:none; }
+.ms-ind-dot.active { background: linear-gradient(90deg,#e50000,#550000); transform:scaleX(1.1); }
+
+/* минимальные отступы для нижнего контента */
+.ms-section-content { max-width:1200px; margin:20px auto 60px; padding:0 12px; box-sizing:border-box; background:transparent; }
+
+/* адаптивы — поджимать аккуратно */
+@media (max-width:1200px) {
+  .ms-hero { width: calc(100% - 20px); margin:10px auto; min-height: 380px; }
+  .ms-hero-center { bottom: 46px; padding: 0 10px; }
+  .ms-hero-title { font-size:36px; }
+}
+@media (max-width:900px) {
+  .ms-hero { width: calc(100% - 16px); margin:8px auto; aspect-ratio: auto; min-height: 320px; border-radius:6px; }
+  .ms-hero-center { bottom: 40px; padding: 0 8px; }
+  .ms-hero-title { font-size:30px; }
+  .ms-hero-arrow { width:36px; height:36px; font-size:18px; }
+  .ms-hero-arrow.left { left:6px; }
+  .ms-hero-arrow.right { right:6px; }
+}
+@media (max-width:480px) {
+  .ms-hero { width: calc(100% - 12px); margin:6px auto; min-height: 260px; }
+  .ms-hero-title { font-size:22px; }
+  .ms-hero-desc { display:block; font-size:11px; }
+  .ms-hero-arrow { width:32px; height:32px; font-size:16px; }
+  .ms-hero-arrow.left { left:4px; }
+  .ms-hero-arrow.right { right:4px; }
+  .ms-section-content { margin:12px auto 30px; padding: 0 6px; }
+}
+.section-badge{
+  color: #e50000;
 }
